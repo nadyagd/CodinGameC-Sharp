@@ -1,0 +1,58 @@
+using System;
+using System.Linq;
+using System.IO;
+using System.Text;
+using System.Collections;
+using System.Collections.Generic;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+class Solution
+{
+    static void Main(string[] args)
+    {
+        
+            int N = int.Parse(Console.ReadLine());
+            int[] horses = new int[N];
+            int  c = 0;
+            int answer = 0;
+            int difference = 0;
+            
+            //input horses strenghts
+            for (int i = 0; i < N; i++)
+            {
+                horses[i] = int.Parse(Console.ReadLine());
+            }
+
+            //sort the array
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0; j < N; j++)
+                {
+                    if (horses[i] < horses[j])
+                    {
+                        c = horses[i];
+                        horses[i] = horses[j];
+                        horses[j] = c;
+                    }
+                }
+            }
+
+            //find the closest strengths difference
+            answer = horses[1] - horses[0];
+            for (int i = 1; i < N; i++)
+            {
+                difference = horses[i] - horses[i - 1];
+                if (difference < answer)
+                {
+                    answer = difference;
+                }
+            }
+            // Write an answer using Console.WriteLine()
+            // To debug: Console.Error.WriteLine("Debug messages...");
+
+            Console.WriteLine(answer);
+        }
+}
